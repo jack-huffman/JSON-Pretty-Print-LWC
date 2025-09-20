@@ -1,0 +1,67 @@
+<template>
+    <lightning-card icon-name="utility:code">
+        <div class="slds-m-around_medium">
+            <!-- JSON Tree Display -->
+            <template if:true={hasPayload}>
+                <!-- Field Label with Utility Buttons -->
+                <div class="field-header slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_small">
+                    <div class="field-label slds-text-heading_small">
+                        {currentFieldLabel}
+                    </div>
+                    <div class="utility-buttons" role="group">
+                        <lightning-button-icon
+                            icon-name={expandCollapseIcon}
+                            alternative-text={expandCollapseButtonLabel}
+                            title={expandCollapseButtonLabel}
+                            onclick={handleExpandCollapseAll}
+                            variant="border-filled"
+                            size="small"
+                            class="slds-m-right_x-small">
+                        </lightning-button-icon>
+                        <lightning-button-icon
+                            icon-name="utility:copy"
+                            alternative-text="Copy to Clipboard"
+                            title="Copy JSON to Clipboard"
+                            onclick={handleCopyToClipboard}
+                            variant="border-filled"
+                            size="small">
+                        </lightning-button-icon>
+                    </div>
+                </div>
+                <div class="json-container">
+                    <template for:each={jsonTree} for:item="item">
+                        <div key={item.key} class="json-item">
+                            <c-json-tree-node 
+                                node={item} 
+                                level={item.level}
+                                ontogglenodeexpansion={handleToggleExpansion}>
+                            </c-json-tree-node>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            
+            <!-- No Data Message -->
+            <template if:false={hasPayload}>
+                <template if:false={error}>
+                    <div class="slds-text-align_center slds-p-around_large">
+                        <lightning-icon icon-name="utility:info" size="medium" class="slds-m-bottom_small"></lightning-icon>
+                        <p class="slds-text-heading_small">No JSON data available</p>
+                        <p class="slds-text-color_weak">
+                            The {currentFieldLabel} field is empty or contains invalid JSON.
+                        </p>
+                    </div>
+                </template>
+            </template>
+            
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <lightning-icon icon-name="utility:error" size="x-small" variant="inverse" class="slds-m-right_x-small"></lightning-icon>
+                    <h2>JSON Parsing Error: {error}</h2>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

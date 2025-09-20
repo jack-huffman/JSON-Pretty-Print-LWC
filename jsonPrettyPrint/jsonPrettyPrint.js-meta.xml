@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fieldApiName" type="String" default="Payload__c" label="JSON Field API Name" description="Enter the API name of the text field containing JSON data (e.g., Payload__c, Response_Body__c, Description)" />
+        </targetConfig>
+    </targetConfigs>
+    <masterLabel>JSON Data Viewer</masterLabel>
+    <description>A universal JSON viewer component that displays JSON data from any text field on any object in a pretty-printed, collapsible tree format. Enter the field API name in the component properties.</description>
+</LightningComponentBundle>

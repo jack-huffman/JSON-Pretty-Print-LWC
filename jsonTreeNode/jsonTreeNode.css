@@ -1,0 +1,116 @@
+.json-node {
+    display: block;
+    margin: 1px 0;
+}
+
+.node-content {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    padding: 2px 4px;
+    border-radius: 2px;
+    transition: background-color 0.1s ease;
+}
+
+/* All nodes get hover background effect */
+.node-content:hover {
+    background-color: #e8f4fd;
+}
+
+/* Only expandable nodes get pointer cursor */
+.node-content.expandable {
+    cursor: pointer;
+}
+
+.expand-icon {
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+.expand-icon-spacer {
+    width: 20px;
+    height: 16px;
+    display: inline-block;
+}
+
+.json-key {
+    color: #0066cc;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.json-key.array-key {
+    color: #7f8c8d;
+    font-weight: normal;
+}
+
+.colon {
+    color: #333;
+    margin-right: 4px;
+}
+
+.json-value {
+    flex: 1;
+    word-break: break-all;
+}
+
+.string-value {
+    color: #d14;
+}
+
+.number-value {
+    color: #099;
+}
+
+.boolean-value {
+    color: #0086b3;
+    font-weight: bold;
+}
+
+.null-value {
+    color: #999;
+    font-style: italic;
+}
+
+.object-value,
+.array-value {
+    color: #666;
+    font-style: italic;
+}
+
+.children-container {
+    margin-left: 0;
+}
+
+.child-node {
+    margin: 0;
+}
+
+/* Level-based indentation styling */
+.level-0 { 
+    margin-left: 0px; 
+}
+.level-1 { 
+    margin-left: 16px; 
+}
+.level-2 { 
+    margin-left: 32px; 
+}
+.level-3 { 
+    margin-left: 48px; 
+}
+.level-4 { 
+    margin-left: 64px; 
+}
+.level-5 { 
+    margin-left: 80px; 
+}
+.level-6 { 
+    margin-left: 96px; 
+}
+.level-7 { 
+    margin-left: 112px; 
+}
+.level-8 { 
+    margin-left: 128px; 
+}

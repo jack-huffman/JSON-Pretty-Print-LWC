@@ -1,0 +1,34 @@
+<template>
+    <div class={nodeClasses}>
+        <div class={nodeContentClasses} onclick={handleToggle}>
+            <template if:true={node.hasChildren}>
+                <lightning-icon 
+                    icon-name={expandIcon} 
+                    size="x-small" 
+                    class="expand-icon">
+                </lightning-icon>
+            </template>
+            <template if:false={node.hasChildren}>
+                <span class="expand-icon-spacer"></span>
+            </template>
+            
+            <span class={keyClasses}>{node.displayKey}</span>
+            <span class="colon">: </span>
+            <span class={valueClasses}>{node.value}</span>
+        </div>
+        
+        <template if:true={showChildren}>
+            <div class="children-container">
+                <template for:each={node.children} for:item="child">
+                    <div key={child.key} class="child-node">
+                        <c-json-tree-node 
+                            node={child} 
+                            level={child.level}
+                            ontogglenodeexpansion={handleChildToggle}>
+                        </c-json-tree-node>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>
