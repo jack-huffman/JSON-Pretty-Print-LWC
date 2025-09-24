@@ -15,6 +15,7 @@ export default class JsonPrettyPrint extends LightningElement {
     allExpanded = false;
     objectInfo = null;
     objectApiName = null;
+    showRawFormat = false; // Toggle state for raw vs pretty format
 
     // Wire to get object metadata for field labels
     @wire(getObjectInfo, { objectApiName: '$objectApiName' })
@@ -127,6 +128,26 @@ export default class JsonPrettyPrint extends LightningElement {
 
     get expandCollapseIcon() {
         return this.allExpanded ? 'utility:collapse_all' : 'utility:expand_all';
+    }
+
+    get formatToggleIcon() {
+        return this.showRawFormat ? 'utility:preview' : 'utility:text';
+    }
+
+    get formatToggleLabel() {
+        return this.showRawFormat ? 'Show Pretty Format' : 'Show Raw JSON';
+    }
+
+    get formattedRawJson() {
+        if (!this.fieldData) {
+            return '';
+        }
+        try {
+            const parsedJson = JSON.parse(this.fieldData);
+            return JSON.stringify(parsedJson, null, 2);
+        } catch (e) {
+            return this.fieldData;
+        }
     }
 
     get currentJsonData() {
@@ -402,6 +423,12 @@ export default class JsonPrettyPrint extends LightningElement {
         if (!successful) {
             throw new Error('execCommand copy failed');
         }
+    }
+
+    handleFormatToggle() {
+        console.log('Format toggle clicked, current showRawFormat:', this.showRawFormat);
+        this.showRawFormat = !this.showRawFormat;
+        console.log('Format toggled to:', this.showRawFormat);
     }
 
     showToast(title, message, variant) {

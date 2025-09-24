@@ -19,6 +19,15 @@
                             class="slds-m-right_x-small">
                         </lightning-button-icon>
                         <lightning-button-icon
+                            icon-name={formatToggleIcon}
+                            alternative-text={formatToggleLabel}
+                            title={formatToggleLabel}
+                            onclick={handleFormatToggle}
+                            variant="border-filled"
+                            size="small"
+                            class="slds-m-right_x-small">
+                        </lightning-button-icon>
+                        <lightning-button-icon
                             icon-name="utility:copy"
                             alternative-text="Copy to Clipboard"
                             title="Copy JSON to Clipboard"
@@ -28,17 +37,27 @@
                         </lightning-button-icon>
                     </div>
                 </div>
-                <div class="json-container">
-                    <template for:each={jsonTree} for:item="item">
-                        <div key={item.key} class="json-item">
-                            <c-json-tree-node 
-                                node={item} 
-                                level={item.level}
-                                ontogglenodeexpansion={handleToggleExpansion}>
-                            </c-json-tree-node>
-                        </div>
-                    </template>
-                </div>
+                <!-- Pretty Print Format -->
+                <template if:false={showRawFormat}>
+                    <div class="json-container">
+                        <template for:each={jsonTree} for:item="item">
+                            <div key={item.key} class="json-item">
+                                <c-json-tree-node 
+                                    node={item} 
+                                    level={item.level}
+                                    ontogglenodeexpansion={handleToggleExpansion}>
+                                </c-json-tree-node>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                
+                <!-- Raw JSON Format -->
+                <template if:true={showRawFormat}>
+                    <div class="raw-json-container slds-box slds-theme_shade">
+                        <pre class="raw-json-text">{formattedRawJson}</pre>
+                    </div>
+                </template>
             </template>
             
             <!-- No Data Message -->
